@@ -50,7 +50,7 @@ PHP_FUNCTION(spl_autoload_psr)
 			MAKE_STD_ZVAL(param1);
 			MAKE_STD_ZVAL(param2);
 
-			ZVAL_STRING(&param1, Z_STRVAL_P(classname), 0);
+			ZVAL_STRING(&param1, Z_STRVAL_P(cname), 0);
 			ZVAL_STRING(&param2, "\\\\", 0);
 
 			params[0] = param1;
@@ -67,7 +67,7 @@ PHP_FUNCTION(spl_autoload_psr)
 
 
 				if (call_user_function_ex(CG(function_table), NULL, &cs_strrpos, &cs_strrpos_res, 2, params, 1, NULL TRSMLS_CC) != FAILURE) {
-					Z_STRVAL_P(classname) = strndup(Z_STRVAL_P(cname), (int *)Z_STRVAL_P(cs_strrpos_res)+1);
+					Z_STRVAL_P(cname) = strndup(Z_STRVAL_P(cname), (int *)Z_STRVAL_P(cs_strrpos_res)+1);
 
 					zval *ret = NULL;
 					MAKE_STD_ZVAL(ret);
